@@ -28,14 +28,14 @@ install_ap51_flash() {
 download_firmware() {
     echo "Step 2: Downloading firmware..."
     cd /tmp
-    curl -O http://files.cloudtrax.com/downloads/firmware/7.0.17/openwrt-ipq807x-datto_ap440-squashfs-sysupgrade.bin
+    curl -O http://files.cloudtrax.com/downloads/firmware/7.0.17/openwrt-ipq807x-datto_ap440-squashfs-factory.bin.signed
     echo "Step 2 completed."
 }
 
 # Function to flash firmware using ap51-flash
 flash_firmware() {
     echo "Step 3: Flashing firmware..."
-    ap51-flash eth0 openwrt-ipq807x-datto_ap440-squashfs-sysupgrade.bin
+    ap51-flash eth0 openwrt-ipq807x-datto_ap440-squashfs-factory.bin.signed
     echo "Step 3 completed."
 }
 
