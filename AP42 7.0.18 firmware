@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# Function to display the design "Datto Netrunners"
+display_datto_netrunners() {
+    cat << "EOF"
+ █████╗ ██████╗ ███████╗ ██╗      ███████╗██╗      █████╗ ███████╗██╗  ██╗
+██╔══██╗██╔══██╗██╔════╝███║      ██╔════╝██║     ██╔══██╗██╔════╝██║  ██║
+███████║██████╔╝███████╗╚██║█████╗█████╗  ██║     ███████║███████╗███████║
+██╔══██║██╔═══╝ ╚════██║ ██║╚════╝██╔══╝  ██║     ██╔══██║╚════██║██╔══██║
+██║  ██║██║     ███████║ ██║      ██║     ███████╗██║  ██║███████║██║  ██║
+╚═╝  ╚═╝╚═╝     ╚══════╝ ╚═╝      ╚═╝     ╚══════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝AP42 7.0.18
+                                                                          
+                                                                                                                                                                                                                
+  By Noor Shaheed, Datto, Kaseya. 09/08/2023    Netrunners ap51-flash tool V.01
+EOF
+}
+
+# Function to update and install ap51-flash package
+install_ap51_flash() {
+    echo "Step 1: Updating and installing ap51-flash package..."
+    opkg update
+    opkg install ap51-flash
+    echo "Step 1 completed."
+}
+
+# Function to download firmware to /tmp directory
+download_firmware() {
+    echo "Step 2: Downloading firmware..."
+    cd /tmp
+    curl -O http://files.cloudtrax.com/downloads/firmware/7.0.18/openwrt-ipq40xx-generic-openmesh_a42-squashfs-factory.bin.signed
+    echo "Step 2 completed."
+}
+
+# Function to flash firmware using ap51-flash
+flash_firmware() {
+    echo "Step 3: looking for potential APs..."
+    ap51-flash eth0 openwrt-ipq40xx-generic-openmesh_a42-squashfs-factory.bin.signed
+    echo "Step 3 completed."
+}
+
+# Main function
+main() {
+    # Display the design "Datto Netrunners"
+    display_datto_netrunners
+
+    echo "Firmware Flashing Tool for AP42 7.0.18"
+    echo "-----------------------------------"
+    install_ap51_flash
+    download_firmware
+    flash_firmware
+    echo "Firmware flashing process completed."
+}
+
+# Call the main function
+main
